@@ -19,7 +19,8 @@ export const formReducer = (state, action) => {
             return { ...state, cuisine: action.payload }
         case "ingredients":
             return { ...state, ingredients: action.payload }
-
+            case "edit_recipe":
+                return action.payload
         default:
             return state
     }

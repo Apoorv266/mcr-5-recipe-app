@@ -9,15 +9,20 @@ const RecipeContextWrapper = ({ children }) => {
     text: "",
     radio: "Name"
   })
-  const [recipeArr, recipeDispatch] = useReducer(recipeReducer, recipeData)
   const [modal, setmodal] = useState(false)
+  const [editId, seteditId] = useState()
+  const [recipeArr, recipeDispatch] = useReducer(recipeReducer, recipeData)
   const [formState, formDispatch] = useReducer(formReducer, initialFormData)
 
 
   const addRecipeFunc = () => {
     const recipeObj = { ...formState, id: Math.floor(Math.random() * 90 + 10), ingredients: formState.ingredients.split(","), instructions: formState.instructions.split(",") }
+    if (editId) {
+      const editObj = recipeArr.find((item) => item.id === editId)
+    }
     recipeDispatch({ type: "ADD_RECIPE", payload: recipeObj })
     setmodal(false)
+    seteditId()
   }
 
   const deleteRecipeFunc = (recipeId) => {
@@ -26,14 +31,24 @@ const RecipeContextWrapper = ({ children }) => {
   }
 
 
-  const editFunc = (currRecipe) =>{
+  const editFunc = (currRecipe) => {
     setmodal(true)
-    console.log(currRecipe)
+    const { name, cuisine, image, ingredients
+      , instructions , id} = currRecipe
+    const obj = {
+      name: name,
+      image: image,
+      instructions: instructions.join(),
+      cuisine: cuisine,
+      ingredients: ingredients.join()
+    }
+    seteditId(id)
+    formDispatch({ type: "edit_recipe", payload: obj })
   }
 
 
 
-  const filterFunc = () =>{
+  const filterFunc = () => {
     const filterArray = filterState.text ? recipeArr.filter((item) => {
       if (filterState.radio === "Name") {
         return item.name.toLowerCase().includes(filterState.text.toLowerCase())
@@ -48,9 +63,9 @@ const RecipeContextWrapper = ({ children }) => {
     }) : recipeArr
     return filterArray
   }
-  
+
   return (
-    <recipeContext.Provider value={{ filterState, setfilterState, recipeArr, modal, setmodal, formState, formDispatch, addRecipeFunc, deleteRecipeFunc, filterFunc }}>{children}</recipeContext.Provider>
+    <recipeContext.Provider value={{ filterState, setfilterState, recipeArr, modal, setmodal, formState, formDispatch, addRecipeFunc, deleteRecipeFunc, filterFunc, editFunc }}>{children}</recipeContext.Provider>
   )
 }
 

@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { recipeContext } from "../Contexts/RecipeContext";
 
 const RecipeCard = ({item}) => {
-  const {deleteRecipeFunc} = useContext(recipeContext)
+  const {deleteRecipeFunc, editFunc} = useContext(recipeContext)
   return (
     <div className="recipe-card">
       <img src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png" alt="" srcset="" width={"20px"} onClick={()=>deleteRecipeFunc(item.id)}/>
+      <img src="https://www.freeiconspng.com/thumbs/edit-icon-png/edit-editor-pen-pencil-write-icon--4.png" alt="" srcset="" width={"20px"} onClick={()=>editFunc(item)}/>
       <img
         src={item.image}
         alt=""
