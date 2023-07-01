@@ -1,9 +1,11 @@
-import React, { createContext, useReducer, useState } from 'react'
+import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { recipeData } from '../Data/RecipeData'
 import { formReducer, initialFormData } from '../Reducers/FormInput'
 import { recipeReducer } from '../Reducers/RecipeReducer'
 
+
 export const recipeContext = createContext()
+const recipeArray = JSON.parse(localStorage.getItem("recipeData"))
 const RecipeContextWrapper = ({ children }) => {
   const [filterState, setfilterState] = useState({
     text: "",
@@ -11,7 +13,7 @@ const RecipeContextWrapper = ({ children }) => {
   })
   const [modal, setmodal] = useState(false)
   const [editId, seteditId] = useState()
-  const [recipeArr, recipeDispatch] = useReducer(recipeReducer, recipeData)
+  const [recipeArr, recipeDispatch] = useReducer(recipeReducer, recipeArray)
   const [formState, formDispatch] = useReducer(formReducer, initialFormData)
 
 
@@ -77,6 +79,11 @@ const RecipeContextWrapper = ({ children }) => {
     }) : recipeArr
     return filterArray
   }
+
+  useEffect(() => {
+    localStorage.setItem("recipeData", JSON.stringify(recipeArr))
+  }, [recipeArr])
+  
 
   return (
     <recipeContext.Provider value={{ filterState, setfilterState, recipeArr, modal, setmodal, formState, formDispatch, addRecipeFunc, deleteRecipeFunc, filterFunc, editFunc }}>{children}</recipeContext.Provider>
