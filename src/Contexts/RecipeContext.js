@@ -80,10 +80,6 @@ const RecipeContextWrapper = ({ children }) => {
     return filterArray
   }
 
-  useEffect(() => {
-    localStorage.setItem("recipeData", JSON.stringify(recipeArr))
-  }, [recipeArr])
-
  useEffect(() => {
   const recipeArray = JSON.parse(localStorage.getItem("recipeData"))
   if (recipeArray) {
@@ -91,7 +87,7 @@ const RecipeContextWrapper = ({ children }) => {
   }else{
     localStorage.setItem("recipeData", JSON.stringify(recipeData))
   }
- }, [])
+ }, [recipeArr])
  
 
   return (
