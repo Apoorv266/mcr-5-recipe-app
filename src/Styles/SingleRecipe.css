@@ -1,0 +1,15 @@
+.single-recipe-main{
+    border: 2px solid black;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.recipe-details{
+    height: 500px;
+    width: 600px;
+    text-align: left;
+}
