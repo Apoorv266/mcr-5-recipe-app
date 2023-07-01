@@ -11,8 +11,8 @@ const RecipeList = () => {
       <Filters />
       <div>
         <h1>All Recipies : </h1>
-        {filterFunc().length > 0 ? <div className="recipe-list-card">
-          {filterFunc().map((item) => (
+        {filterFunc()?.length > 0 ? <div className="recipe-list-card">
+          {filterFunc()?.map((item) => (
             <RecipeCard item={item} key={item.id}/>
           ))}
 
