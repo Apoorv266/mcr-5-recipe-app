@@ -23,7 +23,7 @@ const RecipeModal = () => {
           <input type="text" className="modal-input" placeholder="Add image URL" value={formState.image} onChange={(e)=>formDispatch({type : "image", payload : e.target.value})}/>
           <p>Cuisine Name</p>
           <input type="text" className="modal-input" value={formState.cuisine}  onChange={(e)=>formDispatch({type : "cuisine", payload : e.target.value})}/>
-          <p>Ingridents List (seperate by commas)</p>
+          <p>Ingredients List (seperate by commas)</p>
           <textarea value={formState.ingredients}  onChange={(e)=>formDispatch({type : "ingredients", payload : e.target.value})}/>
           <p>Instructions (seperate by commas)</p>
           <textarea value={formState.instructions}   onChange={(e)=>formDispatch({type : "instructions", payload : e.target.value})}/>
