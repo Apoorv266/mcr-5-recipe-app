@@ -31,7 +31,7 @@ const SingleRecipe = () => {
             <strong>Ingredients : </strong>
             {recipeObj.ingredients}
           </p>
-          <h1>Ingredients</h1>
+          <h1>Instructions</h1>
           <ol>
             {recipeObj.instructions.map((item ) => <li>{item}</li>)}
           </ol>

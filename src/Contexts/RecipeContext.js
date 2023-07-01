@@ -17,12 +17,26 @@ const RecipeContextWrapper = ({ children }) => {
 
   const addRecipeFunc = () => {
     const recipeObj = { ...formState, id: Math.floor(Math.random() * 90 + 10), ingredients: formState.ingredients.split(","), instructions: formState.instructions.split(",") }
+
+    const upd_obj = recipeArr.map(obj => {
+      if (obj.id === editId) {
+        obj.name = formState.name;
+        obj.image = formState.image;
+        obj.cuisine = formState.cuisine;
+        obj.ingredients = formState.ingredients.split(",");
+        obj.instructions = formState.instructions.split(",")
+      }
+      return obj;
+
+    })
     if (editId) {
-      const editObj = recipeArr.find((item) => item.id === editId)
+      recipeDispatch({ type: "DELETE_RECIPE", payload: upd_obj })
+    } else {
+      recipeDispatch({ type: "ADD_RECIPE", payload: recipeObj })
     }
-    recipeDispatch({ type: "ADD_RECIPE", payload: recipeObj })
     setmodal(false)
-    seteditId()
+    seteditId("")
+    formDispatch({ type: "empty_input" })
   }
 
   const deleteRecipeFunc = (recipeId) => {
@@ -34,13 +48,13 @@ const RecipeContextWrapper = ({ children }) => {
   const editFunc = (currRecipe) => {
     setmodal(true)
     const { name, cuisine, image, ingredients
-      , instructions , id} = currRecipe
+      , instructions, id } = currRecipe
     const obj = {
       name: name,
       image: image,
-      instructions: instructions.join(),
+      instructions: instructions.join(","),
       cuisine: cuisine,
-      ingredients: ingredients.join()
+      ingredients: ingredients.join(",")
     }
     seteditId(id)
     formDispatch({ type: "edit_recipe", payload: obj })

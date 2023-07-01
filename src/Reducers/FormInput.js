@@ -21,6 +21,8 @@ export const formReducer = (state, action) => {
             return { ...state, ingredients: action.payload }
             case "edit_recipe":
                 return action.payload
+                case "empty_input":
+                return initialFormData
         default:
             return state
     }

@@ -1,0 +1,20 @@
+.filter-main{
+    border: 1px solid black;
+    width: 90%;
+height: 30px;
+margin: auto;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content:flex-start;
+gap: 30px;
+padding: 10px;
+margin-top: 20px;
+}
+
+.filter-input{
+    height: 30px;
+    width: 40%;
+    text-align: center;
+    border-radius: 10px;
+}

@@ -4,11 +4,16 @@ import { recipeContext } from "../Contexts/RecipeContext";
 
 const RecipeModal = () => {
   const { setmodal ,formState , formDispatch, addRecipeFunc} = useContext(recipeContext);
+
+  const closeFunc = () =>{
+    formDispatch({ type: "empty_input" })
+    setmodal(false)
+  }
   return (
     <>
       <div id="myModal" className="modal">
         <div className="modal-content">
-          <span className="close" onClick={() => setmodal(false)}>
+          <span className="close" onClick={closeFunc}>
             X
           </span>
           <div>

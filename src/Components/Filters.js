@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { recipeContext } from "../Contexts/RecipeContext";
-
+import "../Styles/Filter.css"
 const Filters = () => {
   const { setfilterState, filterState } = useContext(recipeContext);
   return (
-    <div>
+    <div className="filter-main">
       <input
         type="text"
-        placeholder="search recipe name here !"
+        placeholder="search recipe by Name/Cuisine/Ingredients !"
         value={filterState.text}
         onChange={(e) =>
           setfilterState((state) => ({ ...state, text: e.target.value }))
         }
+        className="filter-input"
       />
       <span>
         <strong>Filter :</strong>
