@@ -1,5 +1,5 @@
 .single-recipe-main{
-    border: 2px solid black;
+    box-shadow: rgba(6, 0, 0, 0.672) 0px 5px 15px;
     width: 90%;
     margin: auto;
     display: flex;
