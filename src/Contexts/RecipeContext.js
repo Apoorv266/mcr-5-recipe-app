@@ -5,7 +5,7 @@ import { recipeReducer } from '../Reducers/RecipeReducer'
 
 
 export const recipeContext = createContext()
-// const recipeArray = JSON.parse(localStorage.getItem("recipeData"))
+const recipeArray = JSON.parse(localStorage.getItem("recipeData"))
 const RecipeContextWrapper = ({ children }) => {
   const [filterState, setfilterState] = useState({
     text: "",
@@ -13,7 +13,7 @@ const RecipeContextWrapper = ({ children }) => {
   })
   const [modal, setmodal] = useState(false)
   const [editId, seteditId] = useState()
-  const [recipeArr, recipeDispatch] = useReducer(recipeReducer, recipeData)
+  const [recipeArr, recipeDispatch] = useReducer(recipeReducer, recipeArray)
   const [formState, formDispatch] = useReducer(formReducer, initialFormData)
 
 
@@ -80,10 +80,19 @@ const RecipeContextWrapper = ({ children }) => {
     return filterArray
   }
 
-  // useEffect(() => {
-  //   localStorage.setItem("recipeData", JSON.stringify(recipeArr))
-  // }, [recipeArr])
-  
+  useEffect(() => {
+    localStorage.setItem("recipeData", JSON.stringify(recipeArr))
+  }, [recipeArr])
+
+ useEffect(() => {
+  const recipeArray = JSON.parse(localStorage.getItem("recipeData"))
+  if (recipeArray) {
+    localStorage.setItem("recipeData", JSON.stringify(recipeArr))
+  }else{
+    localStorage.setItem("recipeData", JSON.stringify(recipeData))
+  }
+ }, [])
+ 
 
   return (
     <recipeContext.Provider value={{ filterState, setfilterState, recipeArr, modal, setmodal, formState, formDispatch, addRecipeFunc, deleteRecipeFunc, filterFunc, editFunc }}>{children}</recipeContext.Provider>
