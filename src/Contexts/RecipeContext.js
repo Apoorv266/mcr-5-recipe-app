@@ -89,7 +89,6 @@ const RecipeContextWrapper = ({ children }) => {
   }, [recipeArr]);
  
  
-console.log(recipeArr)
   return (
     <recipeContext.Provider value={{ filterState, setfilterState, recipeArr, modal, setmodal, formState, formDispatch, addRecipeFunc, deleteRecipeFunc, filterFunc, editFunc }}>{children}</recipeContext.Provider>
   )
